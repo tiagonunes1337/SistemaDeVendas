@@ -1,8 +1,15 @@
-import google.generativeai as genai
+try:
+    import google.generativeai as genai
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
+    print("Aviso: Biblioteca google-generativeai não instalada. Análise IA será pulada.")
+
 import mysql.connector
 
 # Configure a API do Gemini
-genai.configure(api_key="AIzaSyBlWMneqX5YZIGn_rHszH0xkwfFsY2-c0w")
+if GEMINI_AVAILABLE:
+    genai.configure(api_key="coloque_sua_key_aqui")
 
 def obter_produtos():
     """
@@ -76,6 +83,9 @@ def avaliar_estoque(produtos):
     
     Responda de forma estruturada com os problemas encontrados e recomendações.
     """
+    
+    if not GEMINI_AVAILABLE:
+        return "Análise IA não disponível - biblioteca google-generativeai não instalada."
     
     try:
         # Chamar API do Gemini

@@ -40,9 +40,14 @@ Um sistema simples de gerenciamento de vendas desenvolvido em Python utilizando 
 
 ## Como Usar
 
-1. Execute o aplicativo:
+2. Execute o aplicativo:
    ```bash
    python software.py
+   ```
+
+3. Para análise com IA:
+   ```bash
+   python ia_app.py
    ```
 
 2. Na interface principal:
@@ -60,6 +65,8 @@ Um sistema simples de gerenciamento de vendas desenvolvido em Python utilizando 
 - `editar.ui`: Interface de edição de produtos.
 - `produtos.sql`: Script SQL para criação do banco de dados.
 - `robo.py`: Script para análise de estoque usando IA Gemini.
+- `ia_app.py`: Interface gráfica moderna para executar a análise de IA.
+- `IA.ui`: Design da interface de IA.
 
 ## Plano Futuro
 

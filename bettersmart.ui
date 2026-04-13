@@ -178,8 +178,8 @@
    <widget class="QPushButton" name="btnRelatorio">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>280</y>
+      <x>570</x>
+      <y>270</y>
       <width>151</width>
       <height>51</height>
      </rect>
@@ -215,7 +215,28 @@
      <string/>
     </property>
     <property name="alignment">
-     <set>Qt::AlignCenter</set>
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnCadastrar_2">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>270</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:rgb(85, 255, 127)</string>
+    </property>
+    <property name="text">
+     <string>Cadastrar</string>
     </property>
    </widget>
   </widget>

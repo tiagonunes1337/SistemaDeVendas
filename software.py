@@ -10,19 +10,35 @@ conexao = mysql.connector.connect(
 )
 
 def inserir():
-    produto = formulario.txtProduto.text()
-    preco = float(formulario.txtPreco.text().replace(',', '.'))
-    estoque = formulario.txtEstoque.text()
+    try:
+        produto = formulario.txtProduto.text()
+        preco_texto = formulario.txtPreco.text().replace(',', '.')
+        estoque = formulario.txtEstoque.text()
 
-    cursor = conexao.cursor()
-    comando_SQL = 'INSERT INTO produtos (produto, preco, estoque) VALUES (%s, %s, %s)'
-    cursor.execute(comando_SQL, (produto, preco, estoque))
-    conexao.commit()
+        # Validação básica
+        if not produto or not preco_texto:
+            QMessageBox.warning(formulario, "Erro", "Preencha os campos obrigatórios!")
+            return
 
-    formulario.txtProduto.clear()
-    formulario.txtPreco.clear()
-    formulario.txtEstoque.clear()
-    formulario.lblConfirmacao.setText('Produto cadastrado com sucesso!')
+        preco = float(preco_texto)
+
+        cursor = conexao.cursor()
+        comando_SQL = 'INSERT INTO produtos (produto, preco, estoque) VALUES (%s, %s, %s)'
+        cursor.execute(comando_SQL, (produto, preco, estoque))
+        conexao.commit()
+        cursor.close() # Sempre feche o cursor
+
+        formulario.txtProduto.clear()
+        formulario.txtPreco.clear()
+        formulario.txtEstoque.clear()
+        formulario.lblConfirmacao.setText('Produto cadastrado com sucesso!')
+        
+    except ValueError:
+        QMessageBox.critical(formulario, "Erro", "Preço deve ser um número válido!")
+    except mysql.connector.Error as erro:
+        QMessageBox.critical(formulario, "Erro no Banco", f"Falha ao inserir: {erro}")
+
+    
 
 def listar():
     global relatorio

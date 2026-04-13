@@ -9,7 +9,7 @@ import mysql.connector
 
 # Configure a API do Gemini
 if GEMINI_AVAILABLE:
-    genai.configure(api_key="AIzaSyBlWMneqX5YZIGn_rHszH0xkwfFsY2-c0w")
+    genai.configure(api_key="....")
 
 def obter_produtos():
     """

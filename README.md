@@ -59,10 +59,11 @@ Um sistema simples de gerenciamento de vendas desenvolvido em Python utilizando 
 - `relatoriobettersmart.ui`: Interface do relatório (tabela de produtos).
 - `editar.ui`: Interface de edição de produtos.
 - `produtos.sql`: Script SQL para criação do banco de dados.
+- `robo.py`: Script para análise de estoque usando IA Gemini.
 
 ## Plano Futuro
 
-- **Integração com IA (Gemini)**: Implementar funcionalidade para buscar valores de mercado usando a API do Google Gemini, permitindo sugestões de preços baseados em dados do mercado.
+- **Integração com IA (Gemini)**: Implementado parcialmente em `robo.py` - busca produtos do banco e analisa estoque com sugestões de preços baseados no mercado (requer chave API).
 
 ## Contribuição
 

@@ -1,15 +1,16 @@
 try:
-    import google.generativeai as genai
+    import google.genai as genai
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
-    print("Aviso: Biblioteca google-generativeai não instalada. Análise IA será pulada.")
+    print("Aviso: Biblioteca google-genai não instalada. Análise IA será pulada.")
 
 import mysql.connector
+import time
 
 # Configure a API do Gemini
-if GEMINI_AVAILABLE:
-    genai.configure(api_key="AIzaSyBlWMneqX5YZIGn_rHszH0xkwfFsY2-c0w")
+GEMINI_API_KEY = "...."
+GEMINI_MODEL = "gemini-2.0-flash"
 
 def obter_produtos():
     """
@@ -85,14 +86,36 @@ def avaliar_estoque(produtos):
     """
     
     if not GEMINI_AVAILABLE:
-        return "Análise IA não disponível - biblioteca google-generativeai não instalada."
+        return "Análise IA não disponível - biblioteca google-genai não instalada."
+    if not GEMINI_API_KEY:
+        return "Análise IA não disponível - chave Gemini não configurada."
     
     try:
-        # Chamar API do Gemini
-        model = genai.GenerativeModel("gemini-pro")
-        response = model.generate_content(prompt)
+        # Chamar API do Gemini usando google-genai com retry para quota exceeded
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                client = genai.Client(api_key=GEMINI_API_KEY)
+                response = client.models.generate_content(
+                    model=GEMINI_MODEL,
+                    contents=prompt
+                )
+                return getattr(response, 'text', str(response))
+            except Exception as api_error:
+                error_str = str(api_error)
+                if "RESOURCE_EXHAUSTED" in error_str or "429" in error_str:
+                    if attempt < max_retries - 1:
+                        wait_time = 2 ** attempt  # Exponential backoff: 1s, 2s, 4s
+                        print(f"Quota excedida. Tentando novamente em {wait_time} segundos... (Tentativa {attempt + 1}/{max_retries})")
+                        time.sleep(wait_time)
+                        continue
+                    else:
+                        return f"Erro: Limite de quota da API Gemini excedido. Considere fazer upgrade do plano gratuito ou aguarde o reset diário. Detalhes: {api_error}"
+                else:
+                    # Outros erros, não retry
+                    return f"Erro ao consultar IA: {api_error}"
         
-        return response.text
+        return "Falha após múltiplas tentativas de consulta à IA."
         
     except Exception as erro:
         return f"Erro ao consultar IA: {erro}"

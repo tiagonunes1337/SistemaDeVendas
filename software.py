@@ -110,11 +110,18 @@ def excluir():
     QMessageBox.information(relatorio, "Sucesso", "Produto excluído com sucesso!")
     carregar_tabela()
 
+
 app = QtWidgets.QApplication([])
+
+def abrir_ia():
+    import subprocess
+    subprocess.Popen(['python', 'robo.py'])
+
 
 formulario = uic.loadUi('bettersmart.ui')
 formulario.btnCadastrar.clicked.connect(inserir)
 formulario.btnRelatorio.clicked.connect(listar)
+formulario.btnIA.clicked.connect(abrir_ia)
 formulario.show()
 
 app.exec_()

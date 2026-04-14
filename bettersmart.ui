@@ -193,7 +193,7 @@
      <string notr="true">background:rgb(85, 255, 127)</string>
     </property>
     <property name="text">
-     <string>Relatorio</string>
+     <string>Relatório</string>
     </property>
    </widget>
    <widget class="QLabel" name="lblConfirmacao">
@@ -215,15 +215,15 @@
      <string/>
     </property>
     <property name="alignment">
-     <set>Qt::AlignmentFlag::AlignCenter</set>
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnCadastrar_2">
+   <widget class="QPushButton" name="btnIA">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>270</x>
       <y>270</y>
-      <width>151</width>
+      <width>221</width>
       <height>51</height>
      </rect>
     </property>
@@ -236,7 +236,7 @@
      <string notr="true">background:rgb(85, 255, 127)</string>
     </property>
     <property name="text">
-     <string>Cadastrar</string>
+     <string>Inteligência Artificial</string>
     </property>
    </widget>
   </widget>

@@ -12,6 +12,9 @@ import time
 GEMINI_API_KEY = "...."
 GEMINI_MODEL = "gemini-2.0-flash"
 
+if GEMINI_AVAILABLE:
+    genai.configure(api_key=GEMINI_API_KEY)
+
 def obter_produtos():
     """
     Obtém a lista de produtos do banco de dados com tratamento de erros.

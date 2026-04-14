@@ -1,7 +1,6 @@
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import mysql.connector
-from styles import DARK_STYLESHEET
 
 conexao = mysql.connector.connect(
     host='127.0.0.1',
@@ -113,8 +112,6 @@ def excluir():
 
 
 app = QtWidgets.QApplication([])
-app.setStyle('Fusion')
-app.setStyleSheet(DARK_STYLESHEET)
 
 def abrir_ia():
     import subprocess

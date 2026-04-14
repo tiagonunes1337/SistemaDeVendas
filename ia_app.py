@@ -1,7 +1,6 @@
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 import robo
-from styles import DARK_STYLESHEET
 
 def analisar_estoque():
     """
@@ -33,8 +32,6 @@ def analisar_estoque():
         formulario_ia.textResultado.append(f"❌ Erro: {erro}")
 
 app = QtWidgets.QApplication([])
-app.setStyle('Fusion')
-app.setStyleSheet(DARK_STYLESHEET)
 
 formulario_ia = uic.loadUi('IA.ui')
 formulario_ia.btnAnalisar.clicked.connect(analisar_estoque)
